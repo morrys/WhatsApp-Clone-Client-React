@@ -68,6 +68,10 @@ const ChatNavbar: React.FC<ChatNavbarProps> = ({ chat, history }) => {
     variables: {
       chatId: chat.id,
     },
+    optimisticResponse: {
+      __typename: 'Mutation',
+      removeChat: chat.id,
+    },
     update: (client, { data: { removeChat } }) => {
       eraseChat(client, removeChat);
     },

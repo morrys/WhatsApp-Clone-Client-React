@@ -1759,6 +1759,13 @@
     "@types/react-native" "*"
     csstype "^2.2.0"
 
+"@types/uuid@3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.5.tgz#d4dc10785b497a1474eae0ba7f0cb09c0ddfd6eb"
+  integrity sha512-MNL15wC3EKyw1VLF+RoVO4hJJdk9t/Hlv3rt1OL65Qvuadm4BYo6g9ZJQqoq7X8NBFSsQXgAujWciovh2lpVjA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/valid-url@1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/valid-url/-/valid-url-1.0.2.tgz#60fa435ce24bfd5ba107b8d2a80796aeaf3a8f45"
@@ -1954,10 +1961,10 @@
   dependencies:
     "@wora/cache-persist" "^1.0.2"
 
-"@wora/apollo-offline@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@wora/apollo-offline/-/apollo-offline-0.1.1.tgz#b83335b705317857b23b5ac1cefd6e2925c86222"
-  integrity sha512-rwkodZME7MLUXhDSbfDsyQAYSssKUhC07a7tZ05FB88Xq0XVVJ3untuFM2DwgxTsf7eDKwQaAM1XNOw+919eDw==
+"@wora/apollo-offline@0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@wora/apollo-offline/-/apollo-offline-0.1.2.tgz#d80a23d3e8985e4db4b69e682a95ddd69d63fb7b"
+  integrity sha512-3Ydc2uPNodtiZA7Rzhu1fPKQu3UQgAz05irjnF6eT/tp0CxZBytm/kwfyP7tSeAz+u/Dw1+LiBnTBSOzle2pOg==
   dependencies:
     "@wora/apollo-cache" "^0.0.3"
     "@wora/cache-persist" "^1.1.0"

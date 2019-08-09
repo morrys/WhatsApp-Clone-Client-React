@@ -8,6 +8,7 @@ import ChatCreationNavbar from './ChatCreationNavbar';
 import { History } from 'history';
 import { useAddChatMutation } from '../../graphql/types';
 import { writeChat } from '../../services/cache.service';
+import { v4 as uuid } from "uuid";
 
 // eslint-disable-next-line
 const Container = styled.div`
@@ -21,8 +22,8 @@ const StyledUsersList = styled(UsersList)`
 `;
 
 gql`
-  mutation AddChat($recipientId: ID!) {
-    addChat(recipientId: $recipientId) {
+  mutation AddChat($id: ID!, $recipientId: ID!) {
+    addChat(id: $id, recipientId: $recipientId) {
       ...Chat
     }
   }
@@ -37,20 +38,21 @@ const ChatCreationScreen: React.FC<ChildComponentProps> = ({ history }) => {
   const [addChat] = useAddChatMutation();
 
   const onUserPick = useCallback(
-    user => addChat({
+    user => {
+      const id: string = uuid();
+      addChat({
         optimisticResponse: {
           __typename: 'Mutation',
           addChat: {
             __typename: 'Chat',
-            id: Math.random()
-              .toString(36)
-              .substr(2, 9),
+            id,
             name: user.name,
             picture: user.picture,
             lastMessage: null,
           },
         },
         variables: {
+          id,
           recipientId: user.id,
         },
         update: (client, { data: { addChat } }) => {
@@ -60,7 +62,8 @@ const ChatCreationScreen: React.FC<ChildComponentProps> = ({ history }) => {
         if (result && result.data !== null) {
           history.push(`/chats/${result.data!.addChat!.id}`);
         }
-      }),
+      })
+    },
     [addChat, history]
   );
 

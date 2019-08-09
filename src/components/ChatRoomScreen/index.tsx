@@ -17,6 +17,8 @@ import {
 } from '../../graphql/types';
 import * as fragments from '../../graphql/fragments';
 import { writeMessage } from '../../services/cache.service';
+import { v4 as uuid } from "uuid";
+
 
 const Container = styled.div`
   background: url(/assets/chat-background.jpg);
@@ -37,8 +39,8 @@ const getChatQuery = gql`
 
 // eslint-disable-next-line
 const addMessageMutation = gql`
-  mutation AddMessage($chatId: ID!, $content: String!) {
-    addMessage(chatId: $chatId, content: $content) {
+  mutation AddMessage($id: ID!, $chatId: ID!, $content: String!) {
+    addMessage(id: $id, chatId: $chatId, content: $content) {
       ...Message
     }
   }
@@ -122,17 +124,16 @@ const [addMessage] = useAddMessageMutation();
         return null;
       }
       const chat = data.chat;
+      const id:string = uuid();
       if (chat === null) return null;
 
       addMessage({
-        variables: { chatId, content },
+        variables: { id, chatId, content },
         optimisticResponse: {
           __typename: 'Mutation',
           addMessage: {
             __typename: 'Message',
-            id: Math.random()
-              .toString(36)
-              .substr(2, 9),
+            id,
             createdAt: new Date(),
             isMine: true,
             chat: {
